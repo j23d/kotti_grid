@@ -1,0 +1,15 @@
+<h4>Add new tile</h4>
+size x: <input type="number" size="2" id="sizex" value="1" />
+<br />
+size y: <input type="number" size="2" id="sizey" value="1" />
+<button id="tile-add-submit">Add</button>
+<script>
+  $(function(){
+    $('#tile-add-submit').on('click', function(evt) {
+        var size_x = $('#tile-adder #sizex').val();
+        var size_y = $('#tile-adder #sizey').val();
+        window.gridster.add_widget('<span />', size_x, size_y, 1, 1);
+        $('#add-tile').popover('hide')
+    });
+  });
+</script>

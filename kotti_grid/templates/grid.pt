@@ -1,0 +1,57 @@
+<div class="row" tal:condition="show">
+    <span class="tiles-actions" tal:condition="api.has_permission('edit')">
+        <input type="hidden" id="grid-fieldname" value="" />
+        <span id="save-tiles" class="tile-action icon-refresh">&nbsp;</span>
+        <span id="add-tile" class="tile-action icon-plus">&nbsp;</span>
+        <span id="tiles-saved-alert" i18n:translate="">Tiles saved.</span>
+        <span id="tile-removed-alert" i18n:translate="">Tile removed.</span>
+    </span>
+    <div class="gridster">
+        <ul>
+            <tal:repeat tal:repeat="tile tiles">
+                <li tal:define="url python:'url' in tile and tile['url'];
+                                type python:'type' in tile and tile['type'];"
+                    id="tile-${tile['row']}-${tile['col']}"
+                    data-row="${tile['row']}"
+                    data-col="${tile['col']}"
+                    data-sizex="${tile['size_x']}"
+                    data-sizey="${tile['size_y']}"
+                    data-url="${url}"
+                    data-type="${type}"
+                    class="${tile['class']}"
+                    style="${tile['style']}">
+
+                    <span class="tile-actions" tal:condition="api.has_permission('edit')">
+                        <span class="icon-move">&nbsp;</span>
+                        <span class="tile-action"
+                           onclick="javascript:window.gridbrowser('tile-${tile['row']}-${tile['col']}','/', 'link');"
+                           onmousedown="return false;">
+                            <span id="srcbrowser" title="Browse" class="icon-edit">&nbsp;</span>
+                        </span>
+                        <span class="tile-action"
+                           onclick="javascript:window.rm_tile('#tile-${tile['row']}-${tile['col']}');"
+                           onmousedown="return false;">
+                            <span title="Remove" class="icon-remove">&nbsp;</span>
+                        </span>
+                        <span class="cpick tile-action" title="Change color">
+                            <span class="icon-tint">&nbsp;</span>
+                        </span>
+                    </span>
+
+                    <div class="tile-content">
+                        <tal:content tal:condition="url">
+                            <span tal:replace="structure tile_content(context, request, url=url, size_x=tile['size_x'])" />
+                        </tal:content>
+                    </div>
+                </li>
+            </tal:repeat>
+        </ul>
+    </div>
+</div>
+<script>
+  $(function(){
+    <tal:condition tal:condition="api.has_permission('edit')">
+        window.gridster.enable();
+    </tal:condition>
+  });
+</script>

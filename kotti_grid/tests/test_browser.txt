@@ -1,0 +1,32 @@
+kotti_grid browser tests
+========================
+
+Setup and Login
+---------------
+
+  >>> from kotti import testing
+  >>> tools = testing.setUpFunctional(
+  ...     **{'kotti.configurators': 'kotti_grid.kotti_configure'})
+  >>> browser = tools['Browser']()
+  >>> ctrl = browser.getControl
+
+  >>> browser.open(testing.BASE_URL + '/@@login')
+  >>> ctrl('Username or email').value = 'admin'
+  >>> ctrl('Password').value = 'secret'
+  >>> ctrl(name='submit').click()
+
+
+Check browser contents
+----------------------
+
+  >>> browser.open(testing.BASE_URL)
+  >>> def dc(content, name='/tmp/out.html'): open(name, 'w').write(content)
+  >>> dc(browser.contents)
+  >>> '<input type="hidden" id="grid-fieldname"' in browser.contents
+  True
+  >>> '<div class="gridster">' in browser.contents
+  True
+  >>> '<span id="save-tiles" class="tile-action icon-refresh">' in browser.contents
+  True
+  >>> '<span id="add-tile" class="tile-action icon-plus">' in browser.contents
+  True

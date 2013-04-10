@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:define-macro="main"
+      tal:define="dummy api.edit_needed"
+      i18n:domain="kotti_grid"
+      >
+    <head>
+        <meta charset="utf-8" />
+        <title>Grid Browser</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+            <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="${request.static_url('kotti:static/favicon.ico')}" />
+    </head>
+    <body class="${request.user is not None and 'logged-in'}
+                 view-${request.view_name or 'default'}
+                 ${api.body_css_class}">
+        <div class="row-fluid">
+            <div class="span12">
+                <div tal:replace="api.render_template('kotti:templates/edit/breadcrumbs.pt')" />
+            </div>
+        </div>
+        <div class="row-fluid">
+            <form id="gridbrowser_form"
+                  method="POST"
+                  enctype="multipart/form-data"
+                  accept-charset="utf-8">
+                <div class="span4 well">
+                    <h3 i18n:translate="">Navigation</h3>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li tal:condition="request.resource_url(context).rstrip('/') != request.application_url.rstrip('/')">
+                            <a href="${request.resource_url(context)}../@@gridbrowser">
+                                <i class="icon-arrow-up"></i>
+                                ..
+                            </a>
+                        </li>
+                        <tal:block tal:repeat="child context.children or context.parent.children">
+                            <li class="${child == context and 'active' or ''}">
+                                <a href="${request.resource_url(child)}@@gridbrowser">
+                                    <i tal:condition="child.type == 'image'" class="icon-picture"></i>
+                                    <i tal:condition="child.type == 'file'" class="icon-file"></i>
+                                    <i tal:condition="child.type not in ('file', 'image', )" class="icon-list-alt"></i>
+                                    ${child.title}
+                                </a>
+                            </li>
+                        </tal:block>
+                    </ul>
+                </div>
+                <div class="span8 well">
+                    <input size="5001" type="text" name="url" id="url" value="${request.resource_url(context)}" /><br />
+                    <input class="btn btn-primary" type="button" value="Insert Link" onClick="gridbrowserdialog.submit();" />
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

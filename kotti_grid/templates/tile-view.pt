@@ -1,0 +1,11 @@
+<div class="tile-content"
+     onclick="javascript:window.location=href='${request.resource_url(context)}'"
+     style="margin:5px;">
+    <tal:image tal:condition="python: context.type == u'image'">
+        <img src="${request.resource_url(context)}image/span${request.size}" title="${context.title}" alt="${context.description" />
+    </tal:image>
+    <tal:content tal:condition="python: context.type != u'image'">
+        <h4>${context.title}</h4>
+        <span>${context.description}</span>
+    </tal:content>
+</div>

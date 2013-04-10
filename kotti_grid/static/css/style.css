@@ -1,0 +1,62 @@
+/* Gridster styles */
+.gridster li {
+    list-style: none;
+    overflow: hidden;
+}
+.gridster {
+    width: 100%;
+    margin: 0 auto;
+
+    opacity: .8;
+
+    -webkit-transition: opacity .6s;
+    -moz-transition: opacity .6s;
+    -o-transition: opacity .6s;
+    -ms-transition: opacity .6s;
+    transition: opacity .6s;
+}
+
+.gridster .gs_w {
+    background: #FFF;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.gridster .player {
+    -webkit-box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+}
+
+
+.gridster .gs_w.try {
+    background-image: url(../img/sprite.png);
+    background-repeat: no-repeat;
+    background-position: 37px -169px;
+
+}
+
+.gridster .preview-holder {
+    border: none!important;
+    border-radius: 0!important;
+    background: rgba(255,255,255,.2)!important;
+}
+
+.tile-actions {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.tile-action {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#tiles-saved-alert,
+#tile-removed-alert {
+    display: none;
+    font-weight: bold;
+    color: red;
+}
