@@ -47,11 +47,11 @@
             </tal:repeat>
         </ul>
     </div>
+    <script>
+      $(function(){
+        <tal:condition tal:condition="api.has_permission('edit')">
+            window.gridster.enable();
+        </tal:condition>
+      });
+    </script>
 </div>
-<script>
-  $(function(){
-    <tal:condition tal:condition="api.has_permission('edit')">
-        window.gridster.enable();
-    </tal:condition>
-  });
-</script>

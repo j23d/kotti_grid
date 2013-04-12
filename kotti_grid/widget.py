@@ -1,11 +1,18 @@
 from urlparse import urlparse
 
+from pyramid.events import subscriber
 from pyramid.traversal import find_resource
 from pyramid.view import view_config
 
 from kotti.resources import get_root
 from kotti.views.slots import assign_slot
+from kotti.views.slots import objectevent_listeners
+from kotti.views.slots import slot_events
 from kotti.views.util import render_view
+
+from kotti_settings.config import slot_names
+from kotti_settings.events import SettingsAfterSave
+from kotti_settings.util import get_setting
 
 from kotti_grid.utils import grid_settings
 
@@ -13,7 +20,16 @@ from kotti_grid.utils import grid_settings
 @view_config(name='grid-widget',
              renderer='kotti_grid:templates/grid.pt')
 def grid_widget(context, request):
-    show = context == get_root()
+    show_in_context = get_setting(u'show_in_context')
+    show = False
+    if show_in_context == u'everywhere':
+        show = True
+    elif show_in_context == u'only on root':
+        show = context == get_root()
+    elif show_in_context == u'not on root':
+        show = context != get_root()
+    elif show_in_context == u'nowhere':
+        show = False
     if show:
         from js.jquery_colorpicker import jquery_colorpicker
         from js.gridster import gridster
@@ -53,6 +69,32 @@ def add_tile(context, request):
     return {}
 
 
+@subscriber(SettingsAfterSave)
+def set_assigned_slot(event):
+    """Reset the widget to the choosen slot."""
+
+    # Check if the settings for this module was saved.
+    if not event.module == __package__:
+        return
+
+    slot = get_setting('slot', u'left')
+    names = [name[0] for name in slot_names]
+
+    # This is somewhat awkward. We check all slots if the widget is already
+    # set and remove it from the listener before we set it to another one.
+    for slot_event in slot_events:
+        if slot_event.name not in names:
+            continue
+        try:
+            listener = objectevent_listeners[(slot_event, None)]
+        except TypeError:
+            listener = None
+        if listener is not None:
+            for func in listener:
+                if func.func_closure[1].cell_contents == 'grid-widget':
+                    listener.remove(func)
+    assign_slot('grid-widget', slot)
+
+
 def includeme(config):
     config.scan(__name__)
-    assign_slot('grid-widget', u'belowcontent')

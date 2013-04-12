@@ -35,7 +35,6 @@ $(function() {
           });
         },
         submit: function(evt) {
-            console.log(evt);
             var url = $("#gridbrowser_form input#url").val();
             var field = window.opener.document.getElementById('grid-fieldname').value;
             field = window.opener.document.getElementById(field)
@@ -97,44 +96,47 @@ $(function() {
         $("#tile-removed-alert").fadeIn().delay(1000).fadeOut('slow');
     }
 
-    var color_tile = undefined;
-    $('.cpick').ColorPicker({
-        onShow: function (colpkr) {
-            color_tile = $(this).parent().parent();
-            $(colpkr).fadeIn(500);
-            return false;
-        },
-        onChange: function (hsb, hex, rgb) {
-            color_tile.css('backgroundColor', '#' + hex);
-        },
-        // onHide: function (hsb, hex, rgb) {
-        //     save_tiles();
-        // }
-    });
+    if ($('.cpick').length > 0) {
+        var color_tile = undefined;
+        $('.cpick').ColorPicker({
+            onShow: function (colpkr) {
+                color_tile = $(this).parent().parent();
+                $(colpkr).fadeIn(500);
+                return false;
+            },
+            onChange: function (hsb, hex, rgb) {
+                color_tile.css('backgroundColor', '#' + hex);
+            },
+            // onHide: function (hsb, hex, rgb) {
+            //     save_tiles();
+            // }
+        });
+    }
 
-    window.gridster = $(".gridster ul").gridster({
-        widget_margins: [10, 10],
-        widget_base_dimensions: [150, 150],
-        serialize_params: function($w, wgd) {
-            return {
-                //html: $w.html(),
-                id: wgd.el[0].id,
-                col: wgd.col,
-                row: wgd.row,
-                size_x: wgd.size_x,
-                size_y: wgd.size_y,
-                'class': $w.attr('class'),
-                url: $w.attr('data-url'),
-                type: $w.attr('data-type'),
-                style: $w.attr('style')
-            };
-        },
-        draggable: {
-            stop: function(event, ui) {
-                //save_tiles();
-                event.preventDefault()
+    if ($('.gridster ul').length > 0) {
+        window.gridster = $(".gridster ul").gridster({
+            widget_margins: [10, 10],
+            widget_base_dimensions: [150, 150],
+            serialize_params: function($w, wgd) {
+                return {
+                    //html: $w.html(),
+                    id: wgd.el[0].id,
+                    col: wgd.col,
+                    row: wgd.row,
+                    size_x: wgd.size_x,
+                    size_y: wgd.size_y,
+                    'class': $w.attr('class'),
+                    url: $w.attr('data-url'),
+                    type: $w.attr('data-type'),
+                    style: $w.attr('style')
+                };
+            },
+            draggable: {
+                stop: function(event, ui) {
+                    //save_tiles();
+                    event.preventDefault()
+                }
             }
-        }
-    }).data('gridster').disable();
-
+        }).data('gridster').disable();
+    }
 });
