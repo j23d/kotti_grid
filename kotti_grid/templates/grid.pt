@@ -25,13 +25,13 @@
                            onmousedown="return false;">
                             <span id="srcbrowser" title="Browse" class="icon-edit">&nbsp;</span>
                         </span>
+                        <span class="cpick tile-action" title="Change color">
+                            <span class="icon-tint">&nbsp;</span>
+                        </span>
                         <span class="tile-action"
                            onclick="javascript:window.rm_tile('#tile-${tile['row']}-${tile['col']}');"
                            onmousedown="return false;">
                             <span title="Remove" class="icon-remove">&nbsp;</span>
-                        </span>
-                        <span class="cpick tile-action" title="Change color">
-                            <span class="icon-tint">&nbsp;</span>
                         </span>
                     </span>
 
