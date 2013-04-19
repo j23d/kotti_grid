@@ -15,6 +15,7 @@ from kotti_settings.events import SettingsAfterSave
 from kotti_settings.util import get_setting
 
 from kotti_grid.utils import grid_settings
+from kotti_grid import _
 
 
 @view_config(name='grid-widget',
@@ -37,7 +38,11 @@ def grid_widget(context, request):
         gridster.need()
     return {'tiles': grid_settings()['tiles'],
             'tile_content': tile_content,
-            'show': show}
+            'show': show,
+            'dimension_x': get_setting(u'dimension_x', 150),
+            'dimension_y': get_setting(u'dimension_y', 150),
+            'margin_x': get_setting(u'margin_x', 10),
+            'margin_y': get_setting(u'margin_y', 10)}
 
 
 @view_config(name="tile-content", renderer='string')
@@ -49,7 +54,10 @@ def tile_content(context, request, url=None, size_x=None):
     if size_x is None and 'size_x' in request.GET:
         size_x = request.GET['size_x']
     path = urlparse(url).path
-    resource = find_resource(context, path)
+    try:
+        resource = find_resource(context, path)
+    except KeyError:
+        return _(u"Can't find resource with path {0}.".format(path))
     request.view_name = "tile-view"
     request.size = 2
     if size_x:

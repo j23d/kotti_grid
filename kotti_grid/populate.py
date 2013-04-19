@@ -9,9 +9,37 @@ from kotti_settings.util import get_setting
 from kotti_grid import _
 
 
+class MarginXSchemaNode(colander.SchemaNode):
+    name = 'margin_x'
+    title = _(u'Margin X')
+    default = 10
+
+
+class MarginYSchemaNode(colander.SchemaNode):
+    name = 'margin_y'
+    title = _(u'Margin Y')
+    default = 10
+
+
+class DimensionXSchemaNode(colander.SchemaNode):
+    name = 'dimension_x'
+    title = _(u'Dimension X')
+    default = 150
+
+
+class DimensionYSchemaNode(colander.SchemaNode):
+    name = 'dimension_y'
+    title = _(u'Dimension Y')
+    default = 150
+
+
 class GridSchema(colander.MappingSchema):
     slot = SlotSchemaNode(colander.String())
     show_in_context = ShowInContextSchemaNode(colander.String())
+    dimension_x = DimensionXSchemaNode(colander.Integer())
+    dimension_y = DimensionYSchemaNode(colander.Integer())
+    margin_x = MarginXSchemaNode(colander.Integer())
+    margin_y = MarginYSchemaNode(colander.Integer())
 
 
 GridSettings = {
@@ -25,5 +53,5 @@ GridSettings = {
 
 def populate():
     add_settings(GridSettings)
-    slot = get_setting('slot', u'belowcontent')
+    slot = get_setting(u'slot', u'belowcontent')
     assign_slot('grid-widget', slot)
