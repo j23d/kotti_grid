@@ -4,7 +4,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 project = 'kotti_grid'
-version = '0.1a1'
+version = '0.1a2dev'
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
@@ -38,11 +38,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'Kotti',
-        'js.jquery_colorpicker',
-        'js.gridster',
-    ],
-    tests_require=[
-        'Kotti',
+        'kotti_settings>=0.1b2',
         'js.jquery_colorpicker',
         'js.gridster',
     ],
