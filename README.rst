@@ -42,7 +42,7 @@ be used for new and existing tiles when you save the settings.
 How to use it?
 ==============
 
-Here you see the different options that are currently exist to change the tiles::
+Here you see the different options that are currently exist to change the tiles.
 
 .. image:: https://raw.github.com/j23d/kotti_grid/master/docs/images/options.png
 
