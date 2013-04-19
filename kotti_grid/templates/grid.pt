@@ -1,9 +1,6 @@
 <div class="row" tal:condition="show">
     <span class="tiles-actions" tal:condition="api.has_permission('edit')">
         <input type="hidden" id="grid-fieldname" value="" />
-        <span id="save-tiles" class="tile-action icon-refresh">&nbsp;</span>
-        <span id="add-tile" class="tile-action icon-plus">&nbsp;</span>
-        <span id="tiles-saved-alert" i18n:translate="">Tiles saved.</span>
         <span id="tile-removed-alert" i18n:translate="">Tile removed.</span>
     </span>
     <div class="gridster">
@@ -47,8 +44,38 @@
             </tal:repeat>
         </ul>
     </div>
+    <span class="tiles-actions" tal:condition="api.has_permission('edit')">
+        <button class="btn" id="save-tiles" i18n:translate="">Save tiles</button>
+        <span id="add-tile" class="tile-action icon-plus">&nbsp;</span>
+    </span>
     <script>
       $(function(){
+        if ($('.gridster ul').length > 0) {
+            window.gridster = $(".gridster ul").gridster({
+                widget_margins: [${margin_x}, ${margin_y}],
+                widget_base_dimensions: [${dimension_x}, ${dimension_y}],
+                serialize_params: function($w, wgd) {
+                    return {
+                        //html: $w.html(),
+                        id: wgd.el[0].id,
+                        col: wgd.col,
+                        row: wgd.row,
+                        size_x: wgd.size_x,
+                        size_y: wgd.size_y,
+                        'class': $w.attr('class'),
+                        url: $w.attr('data-url'),
+                        type: $w.attr('data-type'),
+                        style: $w.attr('style')
+                    };
+                },
+                draggable: {
+                    stop: function(event, ui) {
+                        //save_tiles();
+                        event.preventDefault()
+                    }
+                }
+            }).data('gridster').disable();
+        }
         <tal:condition tal:condition="api.has_permission('edit')">
             window.gridster.enable();
         </tal:condition>
