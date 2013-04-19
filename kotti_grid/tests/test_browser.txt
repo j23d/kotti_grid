@@ -6,7 +6,7 @@ Setup and Login
 
   >>> from kotti import testing
   >>> tools = testing.setUpFunctional(
-  ...     **{'kotti.configurators': 'kotti_grid.kotti_configure'})
+  ...     **{'kotti.configurators': 'kotti_grid.kotti_configure kotti_settings.kotti_configure',})
   >>> browser = tools['Browser']()
   >>> ctrl = browser.getControl
 
@@ -19,9 +19,9 @@ Setup and Login
 Check browser contents
 ----------------------
 
+  >>> browser.open(testing.BASE_URL + '/@@settings')
+  >>> ctrl(name='save').click()
   >>> browser.open(testing.BASE_URL)
-  >>> def dc(content, name='/tmp/out.html'): open(name, 'w').write(content)
-  >>> dc(browser.contents)
   >>> '<input type="hidden" id="grid-fieldname"' in browser.contents
   True
   >>> '<div class="gridster">' in browser.contents

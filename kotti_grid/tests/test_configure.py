@@ -10,6 +10,7 @@ def test_kotti_configure():
         'kotti.available_types': '',
         'pyramid.includes': '',
         'kotti.fanstatic.view_needed': '',
+        'kotti.populators': '',
     }
 
     kotti_configure(settings)
@@ -18,6 +19,8 @@ def test_kotti_configure():
         ' kotti_grid kotti_grid.widget kotti_grid.views'
     assert settings['kotti.fanstatic.view_needed'] ==\
         ' kotti_grid.fanstatic.kotti_grid'
+    assert settings['kotti.populators'] ==\
+        ' kotti_grid.populate.populate'
 
 
 def test_includeme(config):

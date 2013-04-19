@@ -2,8 +2,9 @@ import types
 from kotti_grid.widget import grid_widget
 
 
-def test_widget_view(db_session, dummy_request, root):
-
+def test_widget_view(kg_populate, db_session, dummy_request, events):
+    from kotti.resources import get_root
+    root = get_root
     widget_vals = grid_widget(root, dummy_request)
 
     assert widget_vals['show'] is True
