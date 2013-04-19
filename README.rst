@@ -17,9 +17,9 @@ you setup Fanstatic) section could then look like this::
 
     kotti.configurators =
         kotti_settings.kotti_configure
-        kotti_tagcloud.kotti_configure
+        kotti_grid.kotti_configure
 
-Please note that ``kotti_tagcloud`` depends on kotti_settings, so you have to
+Please note that ``kotti_grid`` depends on kotti_settings, so you have to
 list it in your ``kotti.configurators`` too.
 
 ``kotti_grid`` extends your Kotti site with a widget where you have add a grid of
