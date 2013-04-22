@@ -45,7 +45,7 @@
         </ul>
     </div>
     <span class="tiles-actions" tal:condition="api.has_permission('edit')">
-        <button class="btn" id="save-tiles" i18n:translate="">Save tiles</button>
+        <button id="save-tiles" class="btn" i18n:translate="">Save tiles</button>
         <span id="add-tile" class="tile-action icon-plus">&nbsp;</span>
     </span>
     <script>
