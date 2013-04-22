@@ -16,7 +16,7 @@ def save_grid(context, request):
     data = request.POST
     tiles = eval(data['tiles'])
     request.session.flash(
-                _(u'The tiles have been saved.'), 'success')
+        _(u'The tiles have been saved.'), 'success')
     return save_grid_settings(tiles, 'tiles')
 
 
