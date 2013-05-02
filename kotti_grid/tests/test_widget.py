@@ -1,4 +1,7 @@
 import types
+
+from kotti.testing import FunctionalTestBase
+
 from kotti_grid.widget import grid_widget
 
 
@@ -45,9 +48,6 @@ def test_tile_content_call(db_session, dummy_request, root):
     assert content is None
 
 
-from kotti.testing import FunctionalTestBase
-
-
 class TestTileContent(FunctionalTestBase):
 
     def setUp(self, **kwargs):
@@ -65,7 +65,8 @@ class TestTileContent(FunctionalTestBase):
 
         root['doc1'] = Document(title=u'Tile Doc',
                                 description=u'I am the doc')
-        content = tile_content(root, dummy_request, url='/doc1')
+        content = tile_content(root, dummy_request, url='/doc1',
+                               use='use_title_and_description')
         assert u'<div class="tile-content"' in content
         assert u'<h4>Tile Doc</h4>' in content
         assert u'<span>I am the doc</span>' in content
@@ -82,6 +83,7 @@ class TestTileContent(FunctionalTestBase):
         root['doc2'] = Document(title=u'Tile Doc 2',
                                 description=u'I am the doc 2')
         dummy_request.GET['url'] = '/doc2'
+        dummy_request.GET['use'] = 'use_title_and_description'
         dummy_request.GET['size_x'] = '4'
         content = tile_content(root, dummy_request)
         assert u'<div class="tile-content"' in content

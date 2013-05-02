@@ -27,18 +27,24 @@ $(function() {
 
     window.gridbrowserdialog = {
         init: function() {
-          return $("select[name=image_scale]").change(function() {
-            var image_scale_url;
-            image_scale_url = "" + image_url + "/" + ($(this).val());
-            $("#gridbrowser_image_preview").attr("src", image_scale_url);
-            return $("input[name=url]").val(image_scale_url);
-          });
+            var field = window.opener.document.getElementById('grid-fieldname').value;
+            field = window.opener.document.getElementById(field)
+            var url = field.getAttribute('data-url');
+            var use = field.getAttribute('data-use');
+            var extra_style = field.getAttribute('data-extra-style');
+            if (url !== null) $("input[name=url]").val(url);
+            if (use !== null) $("select[name=use]").val(use);
+            if (extra_style !== null) $("input[name=extra_style]").val(extra_style);
         },
-        submit: function(evt) {
-            var url = $("#gridbrowser_form input#url").val();
+        submit: function() {
+            var url = $("input[name=url]").val();
+            var use = $("select[name=use]").val();
+            var extra_style = $("input[name=extra_style]").val();
             var field = window.opener.document.getElementById('grid-fieldname').value;
             field = window.opener.document.getElementById(field)
             field.setAttribute('data-url', url);
+            field.setAttribute('data-use', use);
+            field.setAttribute('data-extra-style', extra_style);
             window.opener.reload_tile(field);
             return window.close();
         }
@@ -46,13 +52,19 @@ $(function() {
 
     window.reload_tile = function(field) {
         var tile = $(field);
+        var data = {};
         var url = tile.attr('data-url');
-        var params = '/@@tile-content?url=' + url;
+        var use = tile.attr('data-use');
+        var extra_style = tile.attr('data-extra-style');
         var size_x = tile.attr('data-sizex');
+        data['url'] = url;
+        data['use'] = use;
+        data['extra_style'] = extra_style
+        var uri = '/@@tile-content';
         if(size_x !== undefined) {
-            params += '&size_x=' + size_x;
+            data['size_x'] = size_x;
         }
-        tile.children('.tile-content').load(params).fadeIn("slow");
+        tile.children('.tile-content').load(uri, data).fadeIn("slow");
     }
 
 

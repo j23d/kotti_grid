@@ -4,10 +4,12 @@ from pyramid.events import subscriber
 from pyramid.traversal import find_resource
 from pyramid.view import view_config
 
+from kotti.interfaces import IImage
 from kotti.resources import get_root
 from kotti.views.slots import assign_slot
 from kotti.views.slots import objectevent_listeners
 from kotti.views.slots import slot_events
+from kotti.views.util import nodes_tree
 from kotti.views.util import render_view
 
 from kotti_settings.config import slot_names
@@ -46,22 +48,44 @@ def grid_widget(context, request):
 
 
 @view_config(name="tile-content", renderer='string')
-def tile_content(context, request, url=None, size_x=None):
-    if url is None and 'url' in request.GET:
-        url = request.GET['url']
+def tile_content(context, request, url=None, size_x=None, use=None,
+                 extra_style=None):
+    if url is None and 'url' in request.POST:
+        url = request.POST['url']
+    if use is None and 'use' in request.POST:
+        use = request.POST['use']
+    if extra_style is None and 'extra_style' in request.POST:
+        extra_style = request.POST['extra_style']
     if url is None:
         return u''
-    if size_x is None and 'size_x' in request.GET:
-        size_x = request.GET['size_x']
+    if size_x is None and 'size_x' in request.POST:
+        size_x = request.POST['size_x']
     path = urlparse(url).path
     try:
         resource = find_resource(context, path)
     except KeyError:
         return _(u"Can't find resource with path {0}.".format(path))
+
+    request.image = None
+    if use == u'use_internal_image':
+        tree = nodes_tree(request, context=resource).tolist()
+        if tree:
+            resource_images = [obj for obj in tree if IImage.providedBy(obj)]
+            if resource_images:
+                request.image = resource_images[0]
+
+    request.content_url = request.resource_url(resource)
+
     request.view_name = "tile-view"
     request.size = 2
     if size_x:
         request.size = int(size_x) + 2
+    request.use = None
+    if use is not None:
+        request.use = use
+    request.extra_style = u''
+    if extra_style is not None:
+        request.extra_style = extra_style
     return render_view(resource, request, name="tile-view")
 
 

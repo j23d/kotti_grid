@@ -7,14 +7,18 @@
         <ul>
             <tal:repeat tal:repeat="tile tiles">
                 <li tal:define="url python:'url' in tile and tile['url'];
-                                type python:'type' in tile and tile['type'];"
+                                type python:'type' in tile and tile['type'];
+                                use python:'use' in tile and tile['use'];
+                                extra_style python: 'extra_style' in tile and tile['extra_style'];"
                     id="tile-${tile['row']}-${tile['col']}"
                     data-row="${tile['row']}"
                     data-col="${tile['col']}"
                     data-sizex="${tile['size_x']}"
                     data-sizey="${tile['size_y']}"
                     data-url="${url}"
+                    data-use="${use}"
                     data-type="${type}"
+                    data-extra-style="${extra_style}"
                     class="${tile['class']}"
                     style="${tile['style']}">
 
@@ -37,7 +41,7 @@
 
                     <div class="tile-content">
                         <tal:content tal:condition="url">
-                            <span tal:replace="structure tile_content(context, request, url=url, size_x=tile['size_x'])" />
+                            <span tal:replace="structure tile_content(context, request, url=url, size_x=tile['size_x'], use=use, extra_style=extra_style)" />
                         </tal:content>
                     </div>
                 </li>
@@ -64,8 +68,10 @@
                         size_y: wgd.size_y,
                         'class': $w.attr('class'),
                         url: $w.attr('data-url'),
+                        use: $w.attr('data-use'),
                         type: $w.attr('data-type'),
-                        style: $w.attr('style')
+                        extra_style: $w.attr('data-extra-style'),
+                        style: $w.attr('style').replace($w.attr('data-extra-style'), '')
                     };
                 },
                 draggable: {
@@ -76,6 +82,34 @@
                 }
             }).data('gridster').disable();
         }
+        /*window.gridster.resize_widget_dimensions = function(options) {
+
+            if (options.widget_margins) {
+              this.options.widget_margins = options.widget_margins;
+            }
+
+            if (options.widget_base_dimensions) {
+              this.options.widget_base_dimensions = options.widget_base_dimensions;
+            }
+
+            this.min_widget_width  = (this.options.widget_margins[0] * 2)
+                + this.options.widget_base_dimensions[0];
+            this.min_widget_height = (this.options.widget_margins[1] * 2)
+                + this.options.widget_base_dimensions[1];
+
+            var serializedGrid = this.serialize();
+            this.$widgets.each($.proxy(function(i, widget) {
+                var $widget = $(widget);
+                var data = serializedGrid[i];
+                this.resize_widget($widget, data.sizex, data.sizey);
+            }, this));
+
+            this.generate_grid_and_stylesheet();
+            this.get_widgets_from_DOM();
+            this.set_dom_grid_height();
+
+            return false;
+        };*/
         <tal:condition tal:condition="api.has_permission('edit')">
             window.gridster.enable();
         </tal:condition>
