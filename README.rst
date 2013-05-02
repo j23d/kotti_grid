@@ -2,7 +2,12 @@
 kotti_grid
 ==========
 
-grid widget for Kotti.
+Add a grid widget to you Kotti site.
+
+|Build Status|_
+
+.. |Build Status| image:: https://travis-ci.org/j23d/kotti_grid.png
+.. _`Build Status`: https://travis-ci.org/j23d/kotti_grid
 
 `Find out more about Kotti`_
 
