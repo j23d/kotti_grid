@@ -41,8 +41,8 @@ def grid_widget(context, request):
     return {'tiles': grid_settings()['tiles'],
             'tile_content': tile_content,
             'show': show,
-            'dimension_x': get_setting(u'dimension_x', 150),
-            'dimension_y': get_setting(u'dimension_y', 150),
+            'width': get_setting(u'width', 150),
+            'height': get_setting(u'height', 150),
             'margin_x': get_setting(u'margin_x', 10),
             'margin_y': get_setting(u'margin_y', 10)}
 

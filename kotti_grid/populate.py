@@ -21,23 +21,23 @@ class MarginYSchemaNode(colander.SchemaNode):
     default = 10
 
 
-class DimensionXSchemaNode(colander.SchemaNode):
-    name = 'dimension_x'
-    title = _(u'Dimension X')
+class WidthSchemaNode(colander.SchemaNode):
+    name = 'width'
+    title = _(u'Width')
     default = 150
 
 
-class DimensionYSchemaNode(colander.SchemaNode):
-    name = 'dimension_y'
-    title = _(u'Dimension Y')
+class HeightSchemaNode(colander.SchemaNode):
+    name = 'height'
+    title = _(u'Height')
     default = 150
 
 
 class GridSchema(colander.MappingSchema):
     slot = SlotSchemaNode(colander.String())
     show_in_context = ShowInContextSchemaNode(colander.String())
-    dimension_x = DimensionXSchemaNode(colander.Integer())
-    dimension_y = DimensionYSchemaNode(colander.Integer())
+    width = WidthSchemaNode(colander.Integer())
+    height = HeightSchemaNode(colander.Integer())
     margin_x = MarginXSchemaNode(colander.Integer())
     margin_y = MarginYSchemaNode(colander.Integer())
 

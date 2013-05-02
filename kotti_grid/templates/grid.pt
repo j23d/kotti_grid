@@ -57,7 +57,7 @@
         if ($('.gridster ul').length > 0) {
             window.gridster = $(".gridster ul").gridster({
                 widget_margins: [${margin_x}, ${margin_y}],
-                widget_base_dimensions: [${dimension_x}, ${dimension_y}],
+                widget_base_dimensions: [${width}, ${height}],
                 serialize_params: function($w, wgd) {
                     return {
                         //html: $w.html(),
