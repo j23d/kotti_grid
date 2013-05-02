@@ -97,7 +97,7 @@ def set_assigned_slot(event):
     """Reset the widget to the choosen slot."""
 
     # Check if the settings for this module was saved.
-    if not event.module == __package__:
+    if not event.module == __package__:  # pragma: no cover
         return
 
     slot = get_setting('slot', u'left')
@@ -110,7 +110,7 @@ def set_assigned_slot(event):
             continue
         try:
             listener = objectevent_listeners[(slot_event, None)]
-        except TypeError:
+        except TypeError:  # pragma: no cover
             listener = None
         if listener is not None:
             for func in listener:

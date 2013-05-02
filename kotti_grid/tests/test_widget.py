@@ -95,10 +95,43 @@ class TestTileContent(FunctionalTestBase):
 
         root['doc2'] = Document(title=u'Tile Doc 2',
                                 description=u'I am the doc 2')
-        dummy_request.GET['url'] = '/doc2'
-        dummy_request.GET['use'] = 'use_title_and_description'
-        dummy_request.GET['size_x'] = '4'
+        dummy_request.POST['url'] = '/doc2'
+        dummy_request.POST['use'] = 'use_title_and_description'
+        dummy_request.POST['size_x'] = '4'
+        dummy_request.POST['extra_style'] = 'border: 1px solid blue;'
         content = tile_content(root, dummy_request)
         assert u'<div class="tile-content"' in content
         assert u'<h4>Tile Doc 2</h4>' in content
         assert u'<span>I am the doc 2</span>' in content
+        assert u'border: 1px solid blue;' in content
+
+    def test_tile_content_not_exists(self):
+        from kotti_grid.widget import tile_content
+        from kotti.resources import get_root
+        from kotti.testing import DummyRequest
+
+        root = get_root()
+        dummy_request = DummyRequest()
+
+        content = tile_content(root, dummy_request, url='/not-existing')
+        assert content == u"Can't find resource with path /not-existing."
+
+    def test_tile_content_with_image(self):
+        from kotti_grid.widget import tile_content
+        from kotti.resources import Document
+        from kotti.resources import Image
+        from kotti.resources import get_root
+        from kotti.testing import DummyRequest
+        from kotti import DBSession
+
+        root = get_root()
+        dummy_request = DummyRequest()
+
+        root['doc1'] = Document(title=u'Tile with image')
+        root['doc1']['image'] = Image("image content",
+                                      u"img.png",
+                                      u"image/png")
+        DBSession.flush()
+        content = tile_content(root, dummy_request, url='/doc1',
+                               use='use_internal_image')
+        assert content is not None
