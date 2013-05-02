@@ -5,6 +5,9 @@ from fanstatic import Library
 from fanstatic import Resource
 from js.jquery import jquery
 
+from js.jquery_colorpicker import jquery_colorpicker
+from js.gridster import gridster
+
 
 library = Library('kotti_grid', 'static')
 
@@ -14,6 +17,6 @@ css = Resource(library, 'css/style.css',
 
 js = Resource(library, "js/script.js",
               minified="js/script.min.js",
-              depends=[jquery])
+              depends=[jquery, jquery_colorpicker, gridster])
 
 kotti_grid = Group([css, js, ])

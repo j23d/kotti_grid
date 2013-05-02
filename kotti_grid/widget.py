@@ -16,6 +16,7 @@ from kotti_settings.events import SettingsAfterSave
 from kotti_settings.util import get_setting
 from kotti_settings.util import show_in_context
 
+from kotti_grid.fanstatic import kotti_grid
 from kotti_grid.utils import grid_settings
 from kotti_grid import _
 
@@ -25,10 +26,7 @@ from kotti_grid import _
 def grid_widget(context, request):
     show = show_in_context(get_setting(u'show_in_context'), context)
     if show:
-        from js.jquery_colorpicker import jquery_colorpicker
-        from js.gridster import gridster
-        jquery_colorpicker.need()
-        gridster.need()
+        kotti_grid.need()
     return {'tiles': grid_settings()['tiles'],
             'tile_content': tile_content,
             'show': show,
