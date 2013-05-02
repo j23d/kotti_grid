@@ -1,6 +1,7 @@
 from urlparse import urlparse
 
 from pyramid.events import subscriber
+from pyramid.exceptions import PredicateMismatch
 from pyramid.traversal import find_resource
 from pyramid.view import view_config
 
@@ -27,13 +28,14 @@ def grid_widget(context, request):
     show = show_in_context(get_setting(u'show_in_context'), context)
     if show:
         kotti_grid.need()
-    return {'tiles': grid_settings()['tiles'],
-            'tile_content': tile_content,
-            'show': show,
-            'width': get_setting(u'width', 150),
-            'height': get_setting(u'height', 150),
-            'margin_x': get_setting(u'margin_x', 10),
-            'margin_y': get_setting(u'margin_y', 10)}
+        return {'tiles': grid_settings()['tiles'],
+                'tile_content': tile_content,
+                'show': show,
+                'width': get_setting(u'width', 150),
+                'height': get_setting(u'height', 150),
+                'margin_x': get_setting(u'margin_x', 10),
+                'margin_y': get_setting(u'margin_y', 10)}
+    raise(PredicateMismatch)
 
 
 @view_config(name="tile-content", renderer='string')

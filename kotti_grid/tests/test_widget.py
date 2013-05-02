@@ -1,4 +1,5 @@
 import types
+import pytest
 
 from kotti.testing import FunctionalTestBase
 
@@ -7,12 +8,24 @@ from kotti_grid.widget import grid_widget
 
 def test_widget_view(kg_populate, db_session, dummy_request, events):
     from kotti.resources import get_root
-    root = get_root
+    root = get_root()
     widget_vals = grid_widget(root, dummy_request)
 
     assert widget_vals['show'] is True
     assert isinstance(widget_vals['tile_content'], types.FunctionType)
     assert widget_vals['tiles'] == []
+
+
+def test_not_show_widget(kg_populate, db_session, dummy_request, events):
+    from kotti.resources import get_root
+    from pyramid.exceptions import PredicateMismatch
+
+    root = get_root()
+    settings = root.annotations[u'kotti_settings']
+    settings[u'kotti_grid-show_in_context'] = u'not on root'
+
+    with pytest.raises(PredicateMismatch):
+        grid_widget(root, dummy_request)
 
 
 def test_add_tile(db_session, dummy_request, root):
