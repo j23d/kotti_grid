@@ -38,7 +38,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'Kotti',
-        'kotti_settings>=0.1b2',
+        'kotti_settings>=0.1b4',
         'js.jquery_colorpicker',
         'js.gridster',
     ],

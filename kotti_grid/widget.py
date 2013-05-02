@@ -5,7 +5,6 @@ from pyramid.traversal import find_resource
 from pyramid.view import view_config
 
 from kotti.interfaces import IImage
-from kotti.resources import get_root
 from kotti.views.slots import assign_slot
 from kotti.views.slots import objectevent_listeners
 from kotti.views.slots import slot_events
@@ -15,6 +14,7 @@ from kotti.views.util import render_view
 from kotti_settings.config import slot_names
 from kotti_settings.events import SettingsAfterSave
 from kotti_settings.util import get_setting
+from kotti_settings.util import show_in_context
 
 from kotti_grid.utils import grid_settings
 from kotti_grid import _
@@ -23,16 +23,7 @@ from kotti_grid import _
 @view_config(name='grid-widget',
              renderer='kotti_grid:templates/grid.pt')
 def grid_widget(context, request):
-    show_in_context = get_setting(u'show_in_context')
-    show = False
-    if show_in_context == u'everywhere':
-        show = True
-    elif show_in_context == u'only on root':
-        show = context == get_root()
-    elif show_in_context == u'not on root':
-        show = context != get_root()
-    elif show_in_context == u'nowhere':
-        show = False
+    show = show_in_context(get_setting(u'show_in_context'), context)
     if show:
         from js.jquery_colorpicker import jquery_colorpicker
         from js.gridster import gridster
