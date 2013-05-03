@@ -7,9 +7,7 @@ from kotti_grid import kotti_configure
 def test_kotti_configure():
 
     settings = {
-        'kotti.available_types': '',
         'pyramid.includes': '',
-        'kotti.fanstatic.view_needed': '',
         'kotti.populators': '',
     }
 
