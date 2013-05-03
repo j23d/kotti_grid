@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.1a2
------
+0.1a2(Unreleased)
+-----------------
 
 * Added settings for the grid.
 * Move initialization of the grid to the template.
@@ -13,7 +13,7 @@ Changelog
 * Added german translations.
 
 
-0.1a1
------
+0.1a1(2013-04-10)
+-----------------
 
 * Initial release.

@@ -170,7 +170,7 @@ $(function() {
             $(window).resize( function() {
                 var window_width = $(window).width();
                 var cols = window.gridster.cols;
-                var base_dimension_x = $('.container').width() / cols - margin_x / (cols - 1);
+                var base_dimension_x = $('.container').width() / cols - margin_x / (cols - 2);
                 var base_dimension_y = height;
                 window.gridster.resize_widget_dimensions({widget_base_dimensions: [base_dimension_x, base_dimension_y]});
             });
