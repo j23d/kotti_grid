@@ -3,12 +3,6 @@ from pytest import fixture
 pytest_plugins = "kotti"
 
 
-@fixture
-def kg_populate(db_session):
-    from kotti_grid.populate import populate
-    populate()
-
-
 def settings():
     from kotti import _resolve_dotted
     from kotti import conf_defaults
@@ -25,6 +19,17 @@ def settings():
 def setup_app():
     from kotti import base_configure
     return base_configure({}, **settings()).make_wsgi_app()
+
+
+@fixture
+def kg_populate(db_session):
+    from kotti_grid.populate import populate
+    populate()
+
+
+@fixture
+def kg_setup():
+    setup_app()
 
 
 @fixture

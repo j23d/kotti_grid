@@ -1,4 +1,6 @@
-def test_save_grid_settings(db_session, root):
+
+
+def test_save_grid_settings(db_session, kg_setup, root):
     from kotti_grid.utils import save_grid_settings
     from kotti_grid.utils import grid_settings
 
