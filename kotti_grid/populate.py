@@ -33,6 +33,15 @@ class HeightSchemaNode(colander.SchemaNode):
     default = 150
 
 
+class ResizeSchemaNode(colander.SchemaNode):
+    name = 'resize_tiles'
+    title = _(u'Resize tiles')
+    description = _(u'Enable responsive resizing of the grid. '
+                    u'This feature is experimental, use it with care.')
+    missing = False
+    default = False
+
+
 class GridSchema(colander.MappingSchema):
     slot = SlotSchemaNode(colander.String())
     show_in_context = ShowInContextSchemaNode(colander.String())
@@ -40,6 +49,7 @@ class GridSchema(colander.MappingSchema):
     height = HeightSchemaNode(colander.Integer())
     margin_x = MarginXSchemaNode(colander.Integer())
     margin_y = MarginYSchemaNode(colander.Integer())
+    resize_tiles = ResizeSchemaNode(colander.Boolean())
 
 
 GridSettings = {

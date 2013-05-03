@@ -8,9 +8,10 @@ from pyramid.view import view_defaults
 from kotti.fanstatic import edit_needed
 from kotti.interfaces import IContent
 
+from kotti_settings.util import get_setting
+
 from kotti_grid.fanstatic import kotti_grid
 from kotti_grid.utils import save_grid_settings
-
 from kotti_grid import _
 
 
@@ -23,6 +24,16 @@ def save_grid(context, request):
         _(u'The tiles have been saved.'), 'success')
     return save_grid_settings(tiles, 'tiles')
 
+
+@view_config(name='grid_settings',
+             permission='edit',
+             renderer='json')
+def grid_settings(context, request):
+    return {'resize_tiles': get_setting(u'resize_tiles', False),
+            'width': get_setting(u'width', 150),
+            'height': get_setting(u'height', 150),
+            'margin_x': get_setting(u'margin_x', 10),
+            'margin_y': get_setting(u'margin_y', 10)}
 
 use_values = (('use_title', _(u'Use title')),
               ('use_description', _(u'Use description')),

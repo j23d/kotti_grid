@@ -125,4 +125,65 @@ $(function() {
             // }
         });
     }
+
+    // see https://github.com/ducksboard/gridster.js/pull/77
+    var resize_tiles = false;
+    var width = 150;
+    var height = 150;
+    var margin_x = 10;
+    var margin_y = 10;
+    $.ajax({
+        async: false,
+        url: '/@@grid_settings',
+        success: function(response) {
+            resize_tiles = response['resize_tiles'];
+            width = response['width'];
+            height = response['height'];
+            margin_x = response['margin_x'];
+            margin_y = response['margin_y'];
+        }
+    });
+    if(resize_tiles) {
+        window.onload = function() {
+            window.gridster.resize_widget_dimensions = function(options) {
+                if (options.widget_margins) {
+                  this.options.widget_margins = options.widget_margins;
+                }
+
+                if (options.widget_base_dimensions) {
+                  this.options.widget_base_dimensions = options.widget_base_dimensions;
+                }
+
+                this.min_widget_width  = (this.options.widget_margins[0] * 2)
+                    + this.options.widget_base_dimensions[0];
+                this.min_widget_height = (this.options.widget_margins[1] * 2)
+                    + this.options.widget_base_dimensions[1];
+
+                var serializedGrid = this.serialize();
+                this.$widgets.each($.proxy(function(i, widget) {
+                    var $widget = $(widget);
+                    var data = serializedGrid[i];
+                    this.resize_widget($widget, data.sizex, data.sizey);
+                }, this));
+
+                this.generate_grid_and_stylesheet();
+                this.get_widgets_from_DOM();
+                this.set_dom_grid_height();
+
+                return false;
+            };
+
+            $(window).resize( function() {
+                console.log("resize");
+                var window_width = $(window).width();
+                var cols = window.gridster.cols;
+                var base_dimension_x = $('.container').width() / cols - margin_x / 2;
+                var base_dimension_y = height;
+                window.gridster.resize_widget_dimensions({widget_base_dimensions: [base_dimension_x, base_dimension_y]});
+            });
+            $(window).resize();
+        }
+    }
+
 });
+
