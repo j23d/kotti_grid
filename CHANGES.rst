@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1a2(Unreleased)
+0.1a2(2013-05-03)
 -----------------
 
 * Added settings for the grid.
