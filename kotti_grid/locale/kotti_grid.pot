@@ -1,0 +1,121 @@
+# Translations template for kotti_grid.
+# Copyright (C) 2013 ORGANIZATION
+# This file is distributed under the same license as the kotti_grid project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: kotti_grid 0.1a2dev\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2013-05-03 15:34+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: kotti_grid/populate.py:14
+msgid "Margin X"
+msgstr ""
+
+#: kotti_grid/populate.py:20
+msgid "Margin Y"
+msgstr ""
+
+#: kotti_grid/populate.py:26
+msgid "Width"
+msgstr ""
+
+#: kotti_grid/populate.py:32
+msgid "Height"
+msgstr ""
+
+#: kotti_grid/populate.py:38
+msgid "Resize tiles"
+msgstr ""
+
+#: kotti_grid/populate.py:39
+msgid ""
+"Enable responsive resizing of the grid. This feature is experimental, use it "
+"with care."
+msgstr ""
+
+#: kotti_grid/populate.py:57
+msgid "Grid Settings"
+msgstr ""
+
+#: kotti_grid/populate.py:58
+msgid "Settings for kotti_grid"
+msgstr ""
+
+#: kotti_grid/populate.py:59
+msgid "Successfully saved kotti_grid settings."
+msgstr ""
+
+#: kotti_grid/views.py:24
+msgid "The tiles have been saved."
+msgstr ""
+
+#: kotti_grid/views.py:38
+msgid "Use title"
+msgstr ""
+
+#: kotti_grid/views.py:39
+msgid "Use description"
+msgstr ""
+
+#: kotti_grid/views.py:40
+msgid "Use title and description"
+msgstr ""
+
+#: kotti_grid/views.py:41
+msgid "Use body text"
+msgstr ""
+
+#: kotti_grid/views.py:42
+msgid "Use image"
+msgstr ""
+
+#: kotti_grid/views.py:43
+msgid "Use internal image"
+msgstr ""
+
+#: kotti_grid/views.py:48
+msgid "Use"
+msgstr ""
+
+#: kotti_grid/views.py:56
+msgid "Extra styles"
+msgstr ""
+
+#: kotti_grid/templates/add-tile.pt:3
+msgid "Add new tile"
+msgstr ""
+
+#: kotti_grid/templates/add-tile.pt:4
+msgid "Cols"
+msgstr ""
+
+#: kotti_grid/templates/add-tile.pt:6
+msgid "Rows"
+msgstr ""
+
+#: kotti_grid/templates/add-tile.pt:7
+msgid "Add"
+msgstr ""
+
+#: kotti_grid/templates/browser.pt:38
+msgid "Navigation"
+msgstr ""
+
+#: kotti_grid/templates/grid.pt:4
+msgid "Tile removed."
+msgstr ""
+
+#: kotti_grid/templates/grid.pt:52
+msgid "Save tiles"
+msgstr ""
+

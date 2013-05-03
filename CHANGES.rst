@@ -10,6 +10,7 @@ Changelog
 * Added new form settings to the gridbrowser.
 * Added experimental feature to enable resizing of the grid to use it
   in responsive layouts.
+* Added german translations.
 
 
 0.1a1
