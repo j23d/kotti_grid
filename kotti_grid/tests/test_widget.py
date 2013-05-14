@@ -1,8 +1,6 @@
 import types
 import pytest
 
-from kotti.testing import FunctionalTestBase
-
 from kotti_grid.widget import grid_widget
 
 
