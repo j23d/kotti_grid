@@ -4,6 +4,7 @@ Changelog
 0.1(Unreleased)
 ---------------
 
+* 99% test coverage.
 
 0.1a2(2013-05-03)
 -----------------
