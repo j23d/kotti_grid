@@ -26,7 +26,7 @@ def save_grid(context, request):
 
 
 @view_config(name='grid_settings',
-             permission='edit',
+             permission='view',
              renderer='json')
 def grid_settings(context, request):
     return {'resize_tiles': get_setting(u'resize_tiles', False),
