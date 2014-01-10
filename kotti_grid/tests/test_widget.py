@@ -85,14 +85,24 @@ def test_tile_content_not_exists(db_session, kg_setup, dummy_request, root):
 
 
 def test_tile_content_with_image(db_session, kg_setup, dummy_request, root):
+    from zope import interface
+    from kotti.interfaces import IDefaultWorkflow
     from kotti_grid.widget import tile_content
     from kotti.resources import Document
     from kotti.resources import Image
+    from kotti.workflow import get_workflow
 
-    root['doc1'] = Document(title=u'Tile with image')
-    root['doc1']['image'] = Image("image content",
-                                  u"img.png",
-                                  u"image/png")
+    root[u'doc1'] = Document(title=u'Tile with image')
+    root[u'doc1'][u'image'] = Image("image content",
+                                    u"img.png",
+                                    u"image/png")
+    # We have to publish the image to get the permission to view it in this test.
+    interface.directlyProvides(root[u'doc1'][u'image'], IDefaultWorkflow)
+    wf = get_workflow(root[u'doc1'][u'image'])
+    wf.transition_to_state(root[u'doc1'][u'image'], None, u'public')
+
     content = tile_content(root, dummy_request, url='/doc1',
                            use='use_internal_image')
-    assert content is not None
+    assert 'onclick="javascript:window.location=href=\'http://example.com/doc1/\'"' in content
+    assert 'src="http://example.com/doc1/image/image/span2"' in content
+    assert 'title="Tile with image"' in content

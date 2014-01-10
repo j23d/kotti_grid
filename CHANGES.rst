@@ -4,9 +4,9 @@ Changelog
 0.1(Unreleased)
 ---------------
 
-* 99% test coverage.
 * Fix the responsive behavior of the grid tiles if the browser window is resized.
 * Setting the permission for the settings view to view instead of edit.
+* Raise test coverage.
 
 
 0.1a2(2013-05-03)
