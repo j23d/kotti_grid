@@ -15,6 +15,7 @@ from kotti.views.util import render_view
 from kotti_settings.config import slot_names
 from kotti_settings.events import SettingsAfterSave
 from kotti_settings.util import get_setting
+from kotti_settings.util import remove_from_slots
 from kotti_settings.util import show_in_context
 
 from kotti_grid.fanstatic import kotti_grid
@@ -103,19 +104,7 @@ def set_assigned_slot(event):
     slot = get_setting('slot', u'left')
     names = [name[0] for name in slot_names]
 
-    # This is somewhat awkward. We check all slots if the widget is already
-    # set and remove it from the listener before we set it to another one.
-    for slot_event in slot_events:
-        if slot_event.name not in names:
-            continue
-        try:
-            listener = objectevent_listeners[(slot_event, None)]
-        except TypeError:  # pragma: no cover
-            listener = None
-        if listener is not None:
-            for func in listener:
-                if func.func_closure[1].cell_contents == 'grid-widget':
-                    listener.remove(func)
+    remove_from_slots('grid-widget')
     assign_slot('grid-widget', slot)
 
 
