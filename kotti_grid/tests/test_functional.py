@@ -18,12 +18,12 @@ def test_grid_settings(kg_browser, kg_populate):
     ctlr = kg_browser.getControl
     kg_browser.open(BASE_URL + '/@@settings')
 
-    assert 'name="__formid__" value="kotti_grid"' \
+    assert 'name="__formid__" value="kotti_grid-grid_settings"' \
         in kg_browser.contents
     assert '<span>Settings for kotti_grid</span>' in kg_browser.contents
     assert 'Height' in kg_browser.contents
     assert 'name="kotti_grid-height" value="150"' in kg_browser.contents
 
     ctlr(name='kotti_grid-height', index=0).value = '300'
-    ctlr(name='save', index=0).click()
+    ctlr(name='save_kotti_grid-grid_settings', index=0).click()
     assert 'name="kotti_grid-height" value="300"' in kg_browser.contents
