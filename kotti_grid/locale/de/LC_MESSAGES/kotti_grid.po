@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kotti_grid 0.1a2dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-03 15:34+0200\n"
+"POT-Creation-Date: 2014-03-06 11:24+0100\n"
 "PO-Revision-Date: 2013-05-03 15:34+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -41,7 +41,9 @@ msgstr "Größenänderung"
 msgid ""
 "Enable responsive resizing of the grid. This feature is experimental, use"
 " it with care."
-msgstr "Aktiviere automatische Größenanpassung des Grids. Experimentell, mit Vorsicht nutzen."
+msgstr ""
+"Aktiviere automatische Größenanpassung des Grids. Experimentell, mit "
+"Vorsicht nutzen."
 
 #: kotti_grid/populate.py:57
 msgid "Grid Settings"
@@ -55,39 +57,47 @@ msgstr "Einstellungen für kotti_grid"
 msgid "Successfully saved kotti_grid settings."
 msgstr "Die Einstellungen für kotti_grid wurden erfolgreich gespeichert."
 
-#: kotti_grid/views.py:24
+#: kotti_grid/views.py:25
 msgid "The tiles have been saved."
 msgstr "Die Tiles wurden gespeichert."
 
-#: kotti_grid/views.py:38
+#: kotti_grid/views.py:39
+msgid "Use custom text"
+msgstr "Benutze den Freitext"
+
+#: kotti_grid/views.py:40
 msgid "Use title"
 msgstr "Benutze den Titel"
 
-#: kotti_grid/views.py:39
+#: kotti_grid/views.py:41
 msgid "Use description"
 msgstr "Benutze die Beschreibung"
 
-#: kotti_grid/views.py:40
+#: kotti_grid/views.py:42
 msgid "Use title and description"
 msgstr "Benutze Titel und Beschreibung"
 
-#: kotti_grid/views.py:41
+#: kotti_grid/views.py:43
 msgid "Use body text"
 msgstr "Benutze den Haupttext"
 
-#: kotti_grid/views.py:42
+#: kotti_grid/views.py:44
 msgid "Use image"
 msgstr "Benutze das Bild"
 
-#: kotti_grid/views.py:43
+#: kotti_grid/views.py:45
 msgid "Use internal image"
 msgstr "Benutze das erste Bild im Baum des Dokumentes"
 
-#: kotti_grid/views.py:48
+#: kotti_grid/views.py:50
 msgid "Use"
 msgstr "Benutze"
 
-#: kotti_grid/views.py:56
+#: kotti_grid/views.py:57
+msgid "Custom text"
+msgstr "Freitext"
+
+#: kotti_grid/views.py:66
 msgid "Extra styles"
 msgstr "Extra styles"
 
@@ -115,7 +125,7 @@ msgstr "Navigation"
 msgid "Tile removed."
 msgstr "Tile wurde entfernt."
 
-#: kotti_grid/templates/grid.pt:52
+#: kotti_grid/templates/grid.pt:54
 msgid "Save tiles"
 msgstr "Tiles speichern"
 

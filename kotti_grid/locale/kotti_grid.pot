@@ -1,14 +1,14 @@
 # Translations template for kotti_grid.
-# Copyright (C) 2013 ORGANIZATION
+# Copyright (C) 2014 ORGANIZATION
 # This file is distributed under the same license as the kotti_grid project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: kotti_grid 0.1a2dev\n"
+"Project-Id-Version: kotti_grid 0.1dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-03 15:34+0200\n"
+"POT-Creation-Date: 2014-03-06 11:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,39 +55,47 @@ msgstr ""
 msgid "Successfully saved kotti_grid settings."
 msgstr ""
 
-#: kotti_grid/views.py:24
+#: kotti_grid/views.py:25
 msgid "The tiles have been saved."
 msgstr ""
 
-#: kotti_grid/views.py:38
-msgid "Use title"
-msgstr ""
-
 #: kotti_grid/views.py:39
-msgid "Use description"
+msgid "Use custom text"
 msgstr ""
 
 #: kotti_grid/views.py:40
-msgid "Use title and description"
+msgid "Use title"
 msgstr ""
 
 #: kotti_grid/views.py:41
-msgid "Use body text"
+msgid "Use description"
 msgstr ""
 
 #: kotti_grid/views.py:42
-msgid "Use image"
+msgid "Use title and description"
 msgstr ""
 
 #: kotti_grid/views.py:43
+msgid "Use body text"
+msgstr ""
+
+#: kotti_grid/views.py:44
+msgid "Use image"
+msgstr ""
+
+#: kotti_grid/views.py:45
 msgid "Use internal image"
 msgstr ""
 
-#: kotti_grid/views.py:48
+#: kotti_grid/views.py:50
 msgid "Use"
 msgstr ""
 
-#: kotti_grid/views.py:56
+#: kotti_grid/views.py:57
+msgid "Custom text"
+msgstr ""
+
+#: kotti_grid/views.py:66
 msgid "Extra styles"
 msgstr ""
 
@@ -115,7 +123,7 @@ msgstr ""
 msgid "Tile removed."
 msgstr ""
 
-#: kotti_grid/templates/grid.pt:52
+#: kotti_grid/templates/grid.pt:54
 msgid "Save tiles"
 msgstr ""
 

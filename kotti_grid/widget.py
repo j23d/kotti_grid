@@ -41,11 +41,13 @@ def grid_widget(context, request):
 
 @view_config(name="tile-content", renderer='string')
 def tile_content(context, request, url=None, size_x=None, use=None,
-                 extra_style=None):
+                 custom_text=None, extra_style=None):
     if url is None and 'url' in request.POST:
         url = request.POST['url']
     if use is None and 'use' in request.POST:
         use = request.POST['use']
+    if custom_text is None and 'custom_text' in request.POST:
+        custom_text = request.POST['custom_text']
     if extra_style is None and 'extra_style' in request.POST:
         extra_style = request.POST['extra_style']
     if url is None:
@@ -78,6 +80,8 @@ def tile_content(context, request, url=None, size_x=None, use=None,
     request.extra_style = u''
     if extra_style is not None:
         request.extra_style = extra_style
+    if custom_text is not None:
+        request.custom_text = custom_text
     return render_view(resource, request, name="tile-view")
 
 

@@ -77,6 +77,20 @@ def test_tile_content_request(db_session, kg_setup, dummy_request, root):
     assert u'border: 1px solid blue;' in content
 
 
+def test_tile_content_custom_text(db_session, kg_setup, dummy_request, root):
+    from kotti_grid.widget import tile_content
+    from kotti.resources import Document
+
+    root['doc3'] = Document(title=u'Tile Doc 3')
+    dummy_request.POST['url'] = '/doc3'
+    dummy_request.POST['use'] = 'use_custom_text'
+    dummy_request.POST['custom_text'] = '<p>this is it</p>'
+    dummy_request.POST['size_x'] = '4'
+    content = tile_content(root, dummy_request)
+    assert u'<div class="tile-content"' in content
+    assert u'<p>this is it</p>' in content
+
+
 def test_tile_content_not_exists(db_session, kg_setup, dummy_request, root):
     from kotti_grid.widget import tile_content
 

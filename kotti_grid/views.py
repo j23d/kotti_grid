@@ -1,6 +1,7 @@
 import colander
 import deform
 from deform import Form
+from deform.widget import RichTextWidget
 
 from pyramid.view import view_config
 from pyramid.view import view_defaults
@@ -35,7 +36,8 @@ def grid_settings(context, request):
             'margin_x': get_setting(u'margin_x', 10),
             'margin_y': get_setting(u'margin_y', 10)}
 
-use_values = (('use_title', _(u'Use title')),
+use_values = (('use_custom_text', _(u'Use custom text')),
+              ('use_title', _(u'Use title')),
               ('use_description', _(u'Use description')),
               ('use_title_and_description', _(u'Use title and description')),
               ('use_body_text', _(u'Use body text')),
@@ -50,8 +52,16 @@ class UseSchemaNode(colander.SchemaNode):
     widget = deform.widget.SelectWidget(values=use_values)
 
 
+class CustomTextSchemaNode(colander.SchemaNode):
+    name = 'custom_text'
+    title = _(u'Custom text')
+    missing = u'',
+    widget = RichTextWidget(theme='advanced', width=450, height=200)
+
+
 class GridSchema(colander.MappingSchema):
     use = UseSchemaNode(colander.String())
+    custom_text = CustomTextSchemaNode(colander.String())
     extra_style = colander.SchemaNode(colander.String(),
                                  title=_(u'Extra styles'),
                                  missing=u'',)

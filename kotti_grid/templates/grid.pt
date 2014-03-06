@@ -9,6 +9,7 @@
                 <li tal:define="url python:'url' in tile and tile['url'];
                                 type python:'type' in tile and tile['type'];
                                 use python:'use' in tile and tile['use'];
+                                custom_text python: 'custom_text' in tile and tile['custom_text'];
                                 extra_style python: 'extra_style' in tile and tile['extra_style'];"
                     id="tile-${tile['row']}-${tile['col']}"
                     data-row="${tile['row']}"
@@ -18,6 +19,7 @@
                     data-url="${url}"
                     data-use="${use}"
                     data-type="${type}"
+                    data-custom-text="${custom_text}"
                     data-extra-style="${extra_style}"
                     class="${tile['class']}"
                     style="${tile['style']}">
@@ -41,7 +43,7 @@
 
                     <div class="tile-content">
                         <tal:content tal:condition="url">
-                            <span tal:replace="structure tile_content(context, request, url=url, size_x=tile['size_x'], use=use, extra_style=extra_style)" />
+                            <span tal:replace="structure tile_content(context, request, url=url, size_x=tile['size_x'], use=use, custom_text=custom_text, extra_style=extra_style)" />
                         </tal:content>
                     </div>
                 </li>
@@ -70,6 +72,7 @@
                         url: $w.attr('data-url'),
                         use: $w.attr('data-use'),
                         type: $w.attr('data-type'),
+                        custom_text: $w.attr('data-custom-text'),
                         extra_style: $w.attr('data-extra-style'),
                         style: $w.attr('style').replace($w.attr('data-extra-style'), '')
                     };

@@ -12,6 +12,7 @@
              alt="${context.description" />
     </tal:image>
     <tal:content tal:condition="python: context.type != u'image' and request.image is None">
+        <p tal:condition="python:request.use in ['use_custom_text']" tal:content="structure request.custom_text" />
         <h4 tal:condition="python:request.use in ['use_title', 'use_title_and_description']">${context.title}</h4>
         <span tal:condition="python:request.use in ['use_description', 'use_title_and_description']">${context.description}</span>
         <span tal:condition="python:request.use in ['use_body_text']" tal:content="structure context.body" />

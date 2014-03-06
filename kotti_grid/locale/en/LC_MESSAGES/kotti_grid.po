@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kotti_grid 0.1a2dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-03 15:34+0200\n"
+"POT-Creation-Date: 2014-03-06 11:24+0100\n"
 "PO-Revision-Date: 2013-05-03 15:34+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -19,103 +19,113 @@ msgstr ""
 
 #: kotti_grid/populate.py:14
 msgid "Margin X"
-msgstr ""
+msgstr "Margin X"
 
 #: kotti_grid/populate.py:20
 msgid "Margin Y"
-msgstr ""
+msgstr "Margin Y"
 
 #: kotti_grid/populate.py:26
 msgid "Width"
-msgstr ""
+msgstr "Width"
 
 #: kotti_grid/populate.py:32
 msgid "Height"
-msgstr ""
+msgstr "Height"
 
 #: kotti_grid/populate.py:38
 msgid "Resize tiles"
-msgstr ""
+msgstr "Resize tiles"
 
 #: kotti_grid/populate.py:39
 msgid ""
 "Enable responsive resizing of the grid. This feature is experimental, use"
 " it with care."
 msgstr ""
+"Enable responsive resizing of the grid. This feature is experimental, use"
+" it with care."
 
 #: kotti_grid/populate.py:57
 msgid "Grid Settings"
-msgstr ""
+msgstr "Grid Settings"
 
 #: kotti_grid/populate.py:58
 msgid "Settings for kotti_grid"
-msgstr ""
+msgstr "Settings for kotti_grid"
 
 #: kotti_grid/populate.py:59
 msgid "Successfully saved kotti_grid settings."
-msgstr ""
+msgstr "Successfully saved kotti_grid settings."
 
-#: kotti_grid/views.py:24
+#: kotti_grid/views.py:25
 msgid "The tiles have been saved."
-msgstr ""
-
-#: kotti_grid/views.py:38
-msgid "Use title"
-msgstr ""
+msgstr "The tiles have been saved."
 
 #: kotti_grid/views.py:39
-msgid "Use description"
-msgstr ""
+msgid "Use custom text"
+msgstr "Use custom text"
 
 #: kotti_grid/views.py:40
-msgid "Use title and description"
-msgstr ""
+msgid "Use title"
+msgstr "Use title"
 
 #: kotti_grid/views.py:41
-msgid "Use body text"
-msgstr ""
+msgid "Use description"
+msgstr "Use description"
 
 #: kotti_grid/views.py:42
-msgid "Use image"
-msgstr ""
+msgid "Use title and description"
+msgstr "Use title and description"
 
 #: kotti_grid/views.py:43
+msgid "Use body text"
+msgstr "Use body text"
+
+#: kotti_grid/views.py:44
+msgid "Use image"
+msgstr "Use image"
+
+#: kotti_grid/views.py:45
 msgid "Use internal image"
-msgstr ""
+msgstr "Use internal image"
 
-#: kotti_grid/views.py:48
+#: kotti_grid/views.py:50
 msgid "Use"
-msgstr ""
+msgstr "Use"
 
-#: kotti_grid/views.py:56
+#: kotti_grid/views.py:57
+msgid "Custom text"
+msgstr "Custom text"
+
+#: kotti_grid/views.py:66
 msgid "Extra styles"
-msgstr ""
+msgstr "Extra styles"
 
 #: kotti_grid/templates/add-tile.pt:3
 msgid "Add new tile"
-msgstr ""
+msgstr "Add new tile"
 
 #: kotti_grid/templates/add-tile.pt:4
 msgid "Cols"
-msgstr ""
+msgstr "Cols"
 
 #: kotti_grid/templates/add-tile.pt:6
 msgid "Rows"
-msgstr ""
+msgstr "Rows"
 
 #: kotti_grid/templates/add-tile.pt:7
 msgid "Add"
-msgstr ""
+msgstr "Add"
 
 #: kotti_grid/templates/browser.pt:38
 msgid "Navigation"
-msgstr ""
+msgstr "Navigation"
 
 #: kotti_grid/templates/grid.pt:4
 msgid "Tile removed."
-msgstr ""
+msgstr "Tile removed."
 
-#: kotti_grid/templates/grid.pt:52
+#: kotti_grid/templates/grid.pt:54
 msgid "Save tiles"
-msgstr ""
+msgstr "Save tiles"
 
