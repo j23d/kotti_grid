@@ -60,3 +60,9 @@
     font-weight: bold;
     color: red;
 }
+
+.tile-content a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+}
