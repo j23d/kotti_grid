@@ -54,21 +54,32 @@ def tile_content(context, request, url=None, size_x=None, use=None,
         return u''
     if size_x is None and 'size_x' in request.POST:
         size_x = request.POST['size_x']
-    path = urlparse(url).path
-    try:
-        resource = find_resource(context, path)
-    except KeyError:
-        return _(u"Can't find resource with path {0}.".format(path))
+
+    resource = None
+    app_url = request.application_url
+    parsed_url = urlparse(url)
+    base_url = "{}://{}".format(parsed_url.scheme, parsed_url.netloc)
+    if app_url.startswith(base_url):
+        try:
+            resource = find_resource(context, parsed_url.path)
+        except KeyError:
+            return _(u"Can't find resource with path {0}.".format(parsed_url.path))
 
     request.image = None
-    if use == u'use_internal_image':
-        tree = nodes_tree(request, context=resource).tolist()
-        if tree:
-            resource_images = [obj for obj in tree if IImage.providedBy(obj)]
-            if resource_images:
-                request.image = resource_images[0]
-
-    request.content_url = request.resource_url(resource)
+    if resource is not None:
+        current_context = resource
+        if use == u'use_internal_image':
+            tree = nodes_tree(request, context=resource).tolist()
+            if tree:
+                resource_images = [obj for obj in tree if IImage.providedBy(obj)]
+                if resource_images:
+                    request.image = resource_images[0]
+        request.content_url = request.resource_url(resource)
+        request.target = '_self'
+    else:
+        current_context = context
+        request.content_url = url
+        request.target = '_blank'
 
     request.view_name = "tile-view"
     request.size = 2
@@ -82,7 +93,7 @@ def tile_content(context, request, url=None, size_x=None, use=None,
         request.extra_style = extra_style
     if custom_text is not None:
         request.custom_text = custom_text
-    return render_view(resource, request, name="tile-view")
+    return render_view(current_context, request, name="tile-view")
 
 
 @view_config(name="tile-view",

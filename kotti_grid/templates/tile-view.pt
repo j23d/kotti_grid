@@ -1,6 +1,7 @@
 <a class="tile-content"
      href="${request.content_url}"
-     style="${request.extra_style}">
+     style="${request.extra_style}"
+     target="${request.target}">
     <tal:image tal:condition="python: context.type == u'image' or request.image is not None">
         <img tal:condition="python: request.image is not None"
              src="${request.resource_url(request.image)}image/span${request.size}"
