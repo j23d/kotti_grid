@@ -16,6 +16,7 @@
         <![endif]-->
         <link rel="shortcut icon" href="${request.static_url('kotti:static/favicon.ico')}" />
         <script>
+          kotti_context_url = '${request.resource_url(context)}';
           $(window).load(function(){
             gridbrowserdialog.init();
           });

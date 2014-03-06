@@ -14,13 +14,8 @@ $(function() {
 
     window.gridbrowser = function(field_name, url, type) {
         var grid_url;
-        loc = window.location
+        loc = window.location;
         grid_url = loc.protocol + '//' + loc.host + "/@@gridbrowser";
-        if (grid_url.indexOf("?") < 0) {
-          grid_url = grid_url + "?type=" + type;
-        } else {
-          grid_url = grid_url + "&type=" + type;
-        }
         window.document.getElementById('grid-fieldname').value = field_name;
         window.open(grid_url, "Grid Browser", "width=800,height=600,status=yes,scrollbars=yes,resizable=yes");
     };
