@@ -59,7 +59,7 @@ def tile_content(context, request, url=None, size_x=None, use=None,
     app_url = request.application_url
     parsed_url = urlparse(url)
     base_url = "{}://{}".format(parsed_url.scheme, parsed_url.netloc)
-    if app_url.startswith(base_url):
+    if app_url.startswith(base_url) or url.startswith('/'):
         try:
             resource = find_resource(context, parsed_url.path)
         except KeyError:

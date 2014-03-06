@@ -57,7 +57,9 @@
                     </ul>
                 </div>
                 <div class="span8 well">
-                    <input size="5001" type="text" name="url" id="url" value="${request.resource_url(context)}" /><br />
+                    <span i18n:translate="">Url</span>
+                    <br />
+                    <input type="text" name="url" id="url" value="" /><br />
                     <div tal:content="structure form">form</div>
                     <input class="btn btn-primary" type="button" value="Insert Link" onClick="gridbrowserdialog.submit();" />
                 </div>

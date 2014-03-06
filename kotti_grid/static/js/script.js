@@ -14,8 +14,7 @@ $(function() {
 
     window.gridbrowser = function(field_name, url, type) {
         var grid_url;
-        loc = window.location;
-        grid_url = loc.protocol + '//' + loc.host + "/@@gridbrowser";
+        grid_url = window.location.origin + "/@@gridbrowser";
         window.document.getElementById('grid-fieldname').value = field_name;
         window.open(grid_url, "Grid Browser", "width=800,height=600,status=yes,scrollbars=yes,resizable=yes");
     };
@@ -35,11 +34,12 @@ $(function() {
         },
         submit: function() {
             var url = $("input[name=url]").val();
+            url = url.replace(window.location.origin, '');
             var use = $("select[name=use]").val();
             var custom_text = tinyMCE.activeEditor.getContent();
             var extra_style = $("input[name=extra_style]").val();
-            var field = window.opener.document.getElementById('grid-fieldname').value;
-            field = window.opener.document.getElementById(field)
+            var field_name = window.opener.document.getElementById('grid-fieldname').value;
+            field = window.opener.document.getElementById(field_name)
             field.setAttribute('data-url', url);
             field.setAttribute('data-use', use);
             field.setAttribute('data-custom-text', custom_text);
@@ -48,6 +48,20 @@ $(function() {
             return window.close();
         }
     };
+
+    $('#gridbrowser_form .nav li a').click(function(event){
+        var url = $(this).attr('href');
+        url = url.replace('/@@gridbrowser', '');
+        url = url.replace(window.location.origin, '');
+        if (url.indexOf('..', url.length - 2) !== -1) {
+            return true;
+        }
+        $("input[name=url]").val(url);
+        var field_name = window.opener.document.getElementById('grid-fieldname').value;
+        field = window.opener.document.getElementById(field_name)
+        field.setAttribute('data-url', url);
+        window.opener.reload_tile(field);
+    });
 
     window.reload_tile = function(field) {
         var tile = $(field);
