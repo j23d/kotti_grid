@@ -6,9 +6,6 @@
 .gridster {
     width: 100%;
     margin: 0 auto;
-
-    opacity: .8;
-
     -webkit-transition: opacity .6s;
     -moz-transition: opacity .6s;
     -o-transition: opacity .6s;
