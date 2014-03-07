@@ -12,4 +12,4 @@ def test_grid_settings_view(db_session, dummy_request, root):
     view = grid_settings(root, dummy_request)
     assert view == {'width': 150, 'margin_y': 10,
                     'margin_x': 10, 'resize_tiles': False,
-                    'height': 150}
+                    'height': 150, 'slot': 'belowcontent'}

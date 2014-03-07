@@ -55,7 +55,7 @@ def test_tile_content_call(db_session, kg_setup, dummy_request, root):
                             description=u'I am the doc')
     content = tile_content(root, dummy_request, url='/doc1',
                            use='use_title_and_description')
-    assert u'<div class="tile-content"' in content
+    assert u'<a class="tile-content"' in content
     assert u'<h4>Tile Doc</h4>' in content
     assert u'<span>I am the doc</span>' in content
 
@@ -71,7 +71,7 @@ def test_tile_content_request(db_session, kg_setup, dummy_request, root):
     dummy_request.POST['size_x'] = '4'
     dummy_request.POST['extra_style'] = 'border: 1px solid blue;'
     content = tile_content(root, dummy_request)
-    assert u'<div class="tile-content"' in content
+    assert u'<a class="tile-content"' in content
     assert u'<h4>Tile Doc 2</h4>' in content
     assert u'<span>I am the doc 2</span>' in content
     assert u'border: 1px solid blue;' in content
@@ -87,7 +87,7 @@ def test_tile_content_custom_text(db_session, kg_setup, dummy_request, root):
     dummy_request.POST['custom_text'] = '<p>this is it</p>'
     dummy_request.POST['size_x'] = '4'
     content = tile_content(root, dummy_request)
-    assert u'<div class="tile-content"' in content
+    assert u'<a class="tile-content"' in content
     assert u'<p>this is it</p>' in content
 
 
@@ -117,6 +117,6 @@ def test_tile_content_with_image(db_session, kg_setup, dummy_request, root):
 
     content = tile_content(root, dummy_request, url='/doc1',
                            use='use_internal_image')
-    assert 'onclick="javascript:window.location=href=\'http://example.com/doc1/\'"' in content
+    assert 'href="http://example.com/doc1/"' in content
     assert 'src="http://example.com/doc1/image/image/span2"' in content
     assert 'title="Tile with image"' in content

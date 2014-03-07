@@ -34,7 +34,8 @@ def grid_settings(context, request):
             'width': get_setting(u'width', 150),
             'height': get_setting(u'height', 150),
             'margin_x': get_setting(u'margin_x', 10),
-            'margin_y': get_setting(u'margin_y', 10)}
+            'margin_y': get_setting(u'margin_y', 10),
+            'slot': get_setting(u'slot', 'belowcontent')}
 
 use_values = (('use_custom_text', _(u'Use custom text')),
               ('use_title', _(u'Use title')),
