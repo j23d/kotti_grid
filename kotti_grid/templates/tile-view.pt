@@ -1,7 +1,8 @@
-<a class="tile-content"
-     href="${request.content_url}"
-     style="${request.extra_style}"
-     target="${request.target}">
+<a tal:condition="request.content_url is not None"
+   class="tile-content"
+   href="${request.content_url}"
+   style="${request.extra_style}"
+   target="${request.target}">
     <tal:image tal:condition="python: context.type == u'image' or request.image is not None">
         <img tal:condition="python: request.image is not None"
              src="${request.resource_url(request.image)}image/span${request.size}"
@@ -20,3 +21,12 @@
         <span tal:condition="python:request.use in ['use_body_text']" tal:content="structure context.body" />
     </tal:content>
 </a>
+<div tal:condition="request.content_url is None"
+   class="tile-content"
+   style="${request.extra_style}">
+    <p tal:condition="python:request.use in ['use_custom_text']"
+       tal:content="structure request.custom_text" />
+    <h4 tal:condition="python:request.use in ['use_title', 'use_title_and_description']">${context.title}</h4>
+    <span tal:condition="python:request.use in ['use_description', 'use_title_and_description']">${context.description}</span>
+    <span tal:condition="python:request.use in ['use_body_text']" tal:content="structure context.body" />
+</div>

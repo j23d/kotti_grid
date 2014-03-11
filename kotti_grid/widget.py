@@ -50,36 +50,38 @@ def tile_content(context, request, url=None, size_x=None, use=None,
         custom_text = request.POST['custom_text']
     if extra_style is None and 'extra_style' in request.POST:
         extra_style = request.POST['extra_style']
-    if url is None:
-        return u''
     if size_x is None and 'size_x' in request.POST:
         size_x = request.POST['size_x']
 
-    resource = None
-    app_url = request.application_url
-    parsed_url = urlparse(url)
-    base_url = "{}://{}".format(parsed_url.scheme, parsed_url.netloc)
-    if app_url.startswith(base_url) or url.startswith('/'):
-        try:
-            resource = find_resource(context, parsed_url.path)
-        except KeyError:
-            return _(u"Can't find resource with path {0}.".format(parsed_url.path))
-
-    request.image = None
-    if resource is not None:
-        current_context = resource
-        if use == u'use_internal_image':
-            tree = nodes_tree(request, context=resource).tolist()
-            if tree:
-                resource_images = [obj for obj in tree if IImage.providedBy(obj)]
-                if resource_images:
-                    request.image = resource_images[0]
-        request.content_url = request.resource_url(resource)
-        request.target = '_self'
-    else:
+    if url == '':
+        request.content_url = None
         current_context = context
-        request.content_url = url
-        request.target = '_blank'
+    else:
+        resource = None
+        app_url = request.application_url
+        parsed_url = urlparse(url)
+        base_url = "{}://{}".format(parsed_url.scheme, parsed_url.netloc)
+        if app_url.startswith(base_url) or url.startswith('/'):
+            try:
+                resource = find_resource(context, parsed_url.path)
+            except KeyError:
+                return _(u"Can't find resource with path {0}.".format(parsed_url.path))
+
+        request.image = None
+        if resource is not None:
+            current_context = resource
+            if use == u'use_internal_image':
+                tree = nodes_tree(request, context=resource).tolist()
+                if tree:
+                    resource_images = [obj for obj in tree if IImage.providedBy(obj)]
+                    if resource_images:
+                        request.image = resource_images[0]
+            request.content_url = request.resource_url(resource)
+            request.target = '_self'
+        else:
+            current_context = context
+            request.content_url = url
+            request.target = '_blank'
 
     request.view_name = "tile-view"
     request.size = 2

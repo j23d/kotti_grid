@@ -164,47 +164,49 @@ $(function() {
 
     if(resize_tiles) {
         $(window).on('load', function() {
-            window.gridster.resize_widget_dimensions = function(options) {
-                if (options.widget_margins) {
-                  this.options.widget_margins = options.widget_margins;
-                }
-                if (options.widget_base_dimensions) {
-                  this.options.widget_base_dimensions = options.widget_base_dimensions;
-                }
-                this.min_widget_width  = (this.options.widget_margins[0] * 2)
-                    + this.options.widget_base_dimensions[0];
-                this.min_widget_height = (this.options.widget_margins[1] * 2)
-                    + this.options.widget_base_dimensions[1];
-                var serializedGrid = this.serialize();
-                this.$widgets.each($.proxy(function(i, widget) {
-                    var $widget = $(widget);
-                    var data = serializedGrid[i];
-                    this.resize_widget($widget, data.size_x, data.size_y);
-                }, this));
-                // this.generate_grid_and_stylesheet();
-                // this.get_widgets_from_DOM();
-                // this.set_dom_grid_height();
-                this.generate_stylesheet();
-                return false;
-            };
+            if($('.gridster').length > 0) {
+                window.gridster.resize_widget_dimensions = function(options) {
+                    if (options.widget_margins) {
+                      this.options.widget_margins = options.widget_margins;
+                    }
+                    if (options.widget_base_dimensions) {
+                      this.options.widget_base_dimensions = options.widget_base_dimensions;
+                    }
+                    this.min_widget_width  = (this.options.widget_margins[0] * 2)
+                        + this.options.widget_base_dimensions[0];
+                    this.min_widget_height = (this.options.widget_margins[1] * 2)
+                        + this.options.widget_base_dimensions[1];
+                    var serializedGrid = this.serialize();
+                    this.$widgets.each($.proxy(function(i, widget) {
+                        var $widget = $(widget);
+                        var data = serializedGrid[i];
+                        this.resize_widget($widget, data.size_x, data.size_y);
+                    }, this));
+                    // this.generate_grid_and_stylesheet();
+                    // this.get_widgets_from_DOM();
+                    // this.set_dom_grid_height();
+                    this.generate_stylesheet();
+                    return false;
+                };
 
-            $(window).resize( function() {
-                var window_width = $(window).width();
-                var cols = window.gridster.cols;
-                var new_width = $('.container').width() / cols - margin_x / (cols - 2);
-                var p = width * 100 / new_width;
-                var new_height = height * 100 / p;
-                var base_dimension_x = new_width;
-                var base_dimension_y = new_height;
-                window.gridster.resize_widget_dimensions({widget_base_dimensions: [base_dimension_x, base_dimension_y]});
-                if (slot = 'belowcontent') {
-                    var griddy = $('.gridster').get(0);
-                    var conty = $('.container').get(0);
-                    $('.gridster').offset({top: griddy.getBoundingClientRect().top,
-                                           left: conty.getBoundingClientRect().left - 10})
-                }
-            });
-            $(window).resize();
+                $(window).resize( function() {
+                    var window_width = $(window).width();
+                    var cols = window.gridster.cols;
+                    var new_width = $('.container').width() / cols - margin_x / (cols - 2);
+                    var p = width * 100 / new_width;
+                    var new_height = height * 100 / p;
+                    var base_dimension_x = new_width;
+                    var base_dimension_y = new_height;
+                    window.gridster.resize_widget_dimensions({widget_base_dimensions: [base_dimension_x, base_dimension_y]});
+                    if (slot = 'belowcontent') {
+                        var griddy = $('.gridster').get(0);
+                        var conty = $('.container').get(0);
+                        $('.gridster').offset({top: griddy.getBoundingClientRect().top,
+                                               left: conty.getBoundingClientRect().left - 10})
+                    }
+                });
+                $(window).resize();
+            }
         });
     }
 });

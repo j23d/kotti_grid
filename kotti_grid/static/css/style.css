@@ -59,9 +59,8 @@
 }
 
 .tile-content {
-    cursor: pointer;
-    font-size: 1em;
-    font-size: 1vw;
+    font-size: 0.8em;
+    font-size: 0.8vw;
     line-height: 1.2em;
     line-height: 1.2vw;
 }
@@ -73,10 +72,10 @@
 }
 
 .tile-content h4 {
-    font-size: 1.2em;
-    font-size: 1.2vw;
-    line-height: 1.4em;
-    line-height: 1.4vw;
+    font-size: 1em;
+    font-size: 1vw;
+    line-height: 1.2em;
+    line-height: 1.2vw;
 }
 
 #gridbrowser_form #url {

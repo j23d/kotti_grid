@@ -42,9 +42,7 @@
                     </span>
 
                     <div class="tile-content">
-                        <tal:content tal:condition="url">
-                            <span tal:replace="structure tile_content(context, request, url=url, size_x=tile['size_x'], use=use, custom_text=custom_text, extra_style=extra_style)" />
-                        </tal:content>
+                        <span tal:replace="structure tile_content(context, request, url=url, size_x=tile['size_x'], use=use, custom_text=custom_text, extra_style=extra_style)" />
                     </div>
                 </li>
             </tal:repeat>
