@@ -182,9 +182,6 @@ $(function() {
                         var data = serializedGrid[i];
                         this.resize_widget($widget, data.size_x, data.size_y);
                     }, this));
-                    // this.generate_grid_and_stylesheet();
-                    // this.get_widgets_from_DOM();
-                    // this.set_dom_grid_height();
                     this.generate_stylesheet();
                     return false;
                 };
@@ -195,14 +192,10 @@ $(function() {
                     var new_width = $('.container').width() / cols - margin_x / (cols - 2);
                     var p = width * 100 / new_width;
                     var new_height = height * 100 / p;
-                    var base_dimension_x = new_width;
-                    var base_dimension_y = new_height;
-                    window.gridster.resize_widget_dimensions({widget_base_dimensions: [base_dimension_x, base_dimension_y]});
+                    window.gridster.resize_widget_dimensions({widget_base_dimensions: [new_width, new_height]});
                     if (slot = 'belowcontent') {
-                        var griddy = $('.gridster').get(0);
                         var conty = $('.container').get(0);
-                        $('.gridster').offset({top: griddy.getBoundingClientRect().top,
-                                               left: conty.getBoundingClientRect().left - 10})
+                        $('.gridster').offset({left: conty.getBoundingClientRect().left - 10})
                     }
                 });
                 $(window).resize();
