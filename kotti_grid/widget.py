@@ -53,7 +53,7 @@ def tile_content(context, request, url=None, size_x=None, use=None,
     if size_x is None and 'size_x' in request.POST:
         size_x = request.POST['size_x']
 
-    if url == '':
+    if url == '' or url is None or url is False:
         request.content_url = None
         current_context = context
     else:
